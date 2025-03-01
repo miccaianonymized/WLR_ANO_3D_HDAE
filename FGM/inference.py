@@ -1,6 +1,6 @@
 import os
 import sys
-sys.path.append(os.path.abspath('/workspace/DDIM_HDAE_BRAIN_SET_1'))
+sys.path.append(os.path.abspath('/workspace/WRL_ENS_3D_HDAE'))
 from inference_model import create_model
 from inference_data_utils import *
 from monai.utils import misc
@@ -10,7 +10,6 @@ import torch.nn.parallel
 import argparse
 import torch
 import ast
-import os
 
 def args_as_list(s):
     v = ast.literal_eval(s)

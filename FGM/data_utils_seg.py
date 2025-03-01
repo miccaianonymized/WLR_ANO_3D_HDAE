@@ -3,12 +3,8 @@ import natsort
 from monai import data, transforms
 
 def get_loader(args):
-    if args.temp == 1:
-        train_image_list = natsort.natsorted(glob.glob(f'/workspace/dataset/BRAIN_256/normal_final/SET_1/BRAIN_256/images_Tr/train_*/*.nii.gz'))[:12]
-        train_mask_list = natsort.natsorted(glob.glob(f'/workspace/dataset/BRAIN_256/normal_final/SET_1/BRAIN_256/labels_Tr/train_*/*.nii.gz'))[:12]
-    elif args.temp == 0:
-        train_image_list = natsort.natsorted(glob.glob(f'/workspace/dataset/BRAIN_256/normal_final/SET_1/BRAIN_256/images_Tr/train_*/*.nii.gz'))[:]
-        train_mask_list = natsort.natsorted(glob.glob(f'/workspace/dataset/BRAIN_256/normal_final/SET_1/BRAIN_256/labels_Tr/train_*/*.nii.gz'))[:]
+    train_image_list = natsort.natsorted(glob.glob(f'/workspace/dataset/BRAIN_256/normal_final/SET_1/BRAIN_256/images_Tr/train_*/*.nii.gz'))[:]
+    train_mask_list = natsort.natsorted(glob.glob(f'/workspace/dataset/BRAIN_256/normal_final/SET_1/BRAIN_256/labels_Tr/train_*/*.nii.gz'))[:]
     
     valid_image_list = natsort.natsorted(glob.glob(f'/workspace/dataset/BRAIN_256/normal_final/SET_1/BRAIN_256/images_Tr/train_*/*.nii.gz'))[-100:]
     valid_mask_list = natsort.natsorted(glob.glob(f'/workspace/dataset/BRAIN_256/normal_final/SET_1/BRAIN_256/labels_Tr/train_*/*.nii.gz'))[-100:]
@@ -48,18 +44,14 @@ def get_loader(args):
         train_ds,
         batch_size=args.batch_size,
         shuffle=True,
-        # num_workers=3,
         pin_memory=False
-        # persistent_workers=True,
     )
 
     val_loader = data.DataLoader(
         val_ds,
         batch_size=1,
         shuffle=False,
-        # num_workers=2,
         pin_memory=False
-        # persistent_workers=True,
     )
     print("loader is ver (train)")
 

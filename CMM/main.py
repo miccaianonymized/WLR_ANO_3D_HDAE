@@ -1,6 +1,6 @@
 import os
 import sys
-sys.path.append(os.path.abspath('/workspace/DIF_HWAE_BRAIN'))
+sys.path.append(os.path.abspath('/workspace/WRL_ENS_3D_HDAE'))
 from trainer_hdae import run_ddpm_hae_training_ddpm
 from data_utils import get_loader
 from model import create_model
@@ -22,7 +22,7 @@ def str2bool(v):
     else:
         raise argparse.ArgumentTypeError('Boolean value expected.')
 
-parser = argparse.ArgumentParser(description='HDAE-CMM train  pipeline')
+parser = argparse.ArgumentParser(description='HDAE-CMM train pipeline')
 parser.add_argument('--cuda_visible_devices', default='0', type=str)
 parser.add_argument('--image_size', default=96, type=int)
 parser.add_argument('--batch_size', default=8, type=int)

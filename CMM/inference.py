@@ -4,16 +4,13 @@ sys.path.append(os.path.abspath('/workspace/WRL_ENS_3D_HDAE'))
 from inference_data_utils import *
 from inference_model import create_model
 from monai.utils import misc
+from ema_pytorch import EMA
 import torch.nn.parallel
+import SimpleITK as sitk 
+import numpy as np
 import argparse
 import torch
 import ast
-from ema_pytorch import EMA
-import SimpleITK as sitk 
-import torch
-import os
-import numpy as np
-from skimage.transform import resize
 
 def args_as_list(s):
     v = ast.literal_eval(s)
@@ -27,7 +24,7 @@ def str2bool(v):
     else:
         raise argparse.ArgumentTypeError('Boolean value expected.')
 
-parser = argparse.ArgumentParser(description='CMM pipeline')
+parser = argparse.ArgumentParser(description='HDAE-CMM inference pipeline')
 parser.add_argument('--cuda_visible_devices', default='0', type=str)
 parser.add_argument('--dim', default='3D', type=str)
 parser.add_argument('--image_size', default=96, type=int)
@@ -82,7 +79,7 @@ def main_worker_enc_96(args):
                     update_after_step=15000,
                     update_every=10)
 
-    a_path = f'/workspace/DIF_HDAE_BRAIN_ANATOMY_SET_1/results/96_32_128_256_512_4e-05/model_21_final.pt'
+    a_path = f'/workspace/model_21_final.pt'
     weight = torch.load(a_path, map_location='cpu')
     weight['ema']['step'] = torch.ones([1])
     weight['ema']['initted'] = torch.ones([1])
