@@ -1,8 +1,8 @@
 import glob
+import json
 import natsort
 from monai import data, transforms
 
-import json
 def get_loader_256(args):
     if args.session == "int":
         test_int_abnormal_img = natsort.natsorted(glob.glob("/workspace/dataset/BRAIN_TEST_FINAL/IMG/1_INTERNAL/256/abnormal/*.nii.gz"))[:]

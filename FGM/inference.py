@@ -24,9 +24,8 @@ def str2bool(v):
     else:
         raise argparse.ArgumentTypeError('Boolean value expected.')
 
-parser = argparse.ArgumentParser(description='Swin UNETR segmentation pipeline')
+parser = argparse.ArgumentParser(description='HDAE-FGM inference pipeline')
 parser.add_argument('--cuda_visible_devices', default='0', type=str)
-parser.add_argument('--dim', default='3D', type=str)
 parser.add_argument('--image_size', default=96, type=int)
 parser.add_argument('--batch_size', default=1, type=int)
 parser.add_argument('--infer_epoch', default=10, type=int)
@@ -44,11 +43,9 @@ def save_image_256(args, pred, images_ts, img_path_list, i, times):
     ori_img = sitk.ReadImage(img_path_list[i])
 
     images_ts = images_ts.cpu().detach().numpy().transpose(0,4,3,2,1).squeeze()
-    # images_ts = np.fliplr(images_ts)
     images_ts = images_ts.clip(min=0.1, max=0.9)
     
     pred_img = pred.cpu().detach().numpy().transpose(0,4,3,2,1).squeeze()
-    # pred_img = np.fliplr(pred_img)
     pred_img = pred_img.clip(min=0.1, max=0.9)
 
     save_ori = sitk.GetImageFromArray(images_ts)
@@ -80,7 +77,7 @@ def main_worker_enc_256(args):
                     update_after_step=15000,
                     update_every=10)
 
-    a_path = f'/workspace/DDIM_HDAE_BRAIN_SET_1/results_seg/_model_ddim_hdae_seg_3e-05/model_10_final.pt'
+    a_path = f'/workspace/model_10_final.pt'
     weight = torch.load(a_path, map_location='cpu')
     weight['ema']['step'] = torch.ones([1])
     weight['ema']['initted'] = torch.ones([1])

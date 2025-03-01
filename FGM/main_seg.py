@@ -22,15 +22,15 @@ def str2bool(v):
     else:
         raise argparse.ArgumentTypeError('Boolean value expected.')
 
-parser = argparse.ArgumentParser(description='Swin UNETR segmentation pipeline')
+parser = argparse.ArgumentParser(description='HDAE-FGM train pipeline')
 parser.add_argument('--cuda_visible_devices', default='0', type=str)
 parser.add_argument('--image_size', default=256, type=int)
 parser.add_argument('--batch_size', default=2, type=int)
 parser.add_argument('--optim_lr', default=3e-5, type=float)
 parser.add_argument('--max_epochs', default=20, type=int)
 parser.add_argument('--val_interval', default=2, type=int)
-parser.add_argument('--img_save_dir', default='/workspace/DDIM_HDAE_BRAIN_SET_1/results_seg', help='start training from saved checkpoint')
-parser.add_argument('--log_dir', default='/workspace/DDIM_HDAE_BRAIN_SET_1/results_seg', help='start training from saved checkpoint')
+parser.add_argument('--img_save_dir', default='/workspace/results_seg', help='start training from saved checkpoint')
+parser.add_argument('--log_dir', default='/workspace/results_seg', help='start training from saved checkpoint')
 
 def main():
     args = parser.parse_args()

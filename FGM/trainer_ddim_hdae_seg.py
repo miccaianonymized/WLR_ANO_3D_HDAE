@@ -3,7 +3,6 @@ import torch
 from tqdm import tqdm
 import SimpleITK as sitk 
 from pathlib import Path
-from einops import reduce
 from ema_pytorch import EMA
 import torch.nn.functional as F
 from generative.inferers import DiffusionInferer_ae_seg

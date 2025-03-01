@@ -22,15 +22,15 @@ def str2bool(v):
     else:
         raise argparse.ArgumentTypeError('Boolean value expected.')
 
-parser = argparse.ArgumentParser(description='HDAE pipeline')
+parser = argparse.ArgumentParser(description='HDAE-CMM train  pipeline')
 parser.add_argument('--cuda_visible_devices', default='0', type=str)
 parser.add_argument('--image_size', default=96, type=int)
-parser.add_argument('--batch_size', default=1, type=int)
+parser.add_argument('--batch_size', default=8, type=int)
 parser.add_argument('--optim_lr', default=4e-5, type=float)
 parser.add_argument('--max_epochs', default=50, type=int)
 parser.add_argument('--val_interval', default=2, type=int)
-parser.add_argument('--log_dir', default='/workspace/DIF_HDAE_BRAIN_ANATOMY_SET_1/results', help='start training from saved checkpoint')
-parser.add_argument('--img_save_dir', default='/workspace/DIF_HDAE_BRAIN_ANATOMY_SET_1/results', help='start training from saved checkpoint')
+parser.add_argument('--log_dir', default='/workspace/results', help='start training from saved checkpoint')
+parser.add_argument('--img_save_dir', default='/workspace/results', help='start training from saved checkpoint')
 
 def main():
     args = parser.parse_args()
@@ -43,7 +43,6 @@ def main():
 
 def main_worker_enc(args):
    
-    # args.attn = [False,False,False,False,True]
     os.makedirs(args.log_dir + '/' + str(args.image_size) + "_" + str(args.channels[0])  + "_" + str(args.channels[1]) + "_" + str(args.channels[2]) + "_" + str(args.channels[3]) + "_" + \
                 str(args.optim_lr), exist_ok=True)
     

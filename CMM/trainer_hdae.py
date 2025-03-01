@@ -2,7 +2,6 @@ from generative.networks.schedulers import DDPMScheduler
 from generative.inferers import DiffusionInferer_ae
 import torch.nn.functional as F
 from ema_pytorch import EMA
-from einops import reduce
 import SimpleITK as sitk 
 from pathlib import Path
 from tqdm import tqdm
